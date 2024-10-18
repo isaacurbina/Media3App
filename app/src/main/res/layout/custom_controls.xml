@@ -55,8 +55,8 @@
 
         <ImageView
             android:id="@+id/exo_play_pause_button"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/pause"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +67,7 @@
             android:id="@+id/exo_backward"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="30dp"
             android:src="@drawable/backward"
             app:layout_constraintBottom_toBottomOf="@id/exo_play_pause_button"
             app:layout_constraintEnd_toStartOf="@id/exo_play_pause_button"
@@ -77,7 +77,7 @@
             android:id="@+id/exo_forward"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="30dp"
             android:src="@drawable/forward"
             app:layout_constraintBottom_toBottomOf="@id/exo_play_pause_button"
             app:layout_constraintStart_toEndOf="@id/exo_play_pause_button"
