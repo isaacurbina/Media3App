@@ -18,6 +18,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:resize_mode="fit"
-        app:show_buffering="when_playing" />
+        app:show_buffering="never"
+        app:use_controller="true" />
+
+    <ProgressBar
+        android:id="@+id/exo_buffering_progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:focusable="false"
+        android:indeterminate="true"
+        android:indeterminateBehavior="repeat"
+        android:indeterminateOnly="true"
+        android:indeterminateTint="#7F00FF"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/playerView"
+        app:layout_constraintEnd_toEndOf="@id/playerView"
+        app:layout_constraintStart_toStartOf="@id/playerView"
+        app:layout_constraintTop_toTopOf="@id/playerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

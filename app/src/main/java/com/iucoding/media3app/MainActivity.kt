@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 
@@ -21,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var playPauseButton: ImageView
     private lateinit var fullscreenButton: ImageView
     private lateinit var titleText: TextView
+    private lateinit var bufferingProgressBar: ProgressBar
     private lateinit var playerView: PlayerView
     private lateinit var exoPlayer: ExoPlayer
     private var isFullScreen: Boolean = false
@@ -30,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         playerView = findViewById(R.id.playerView)
-        exoPlayer = ExoPlayer.Builder(this).build()
+        val exoPlayerBuilder = ExoPlayer.Builder(this)
+        exoPlayer = exoPlayerBuilder.build()
         val mediaItem = MediaItem.fromUri(VIDEO_URI)
         playerView.player = exoPlayer
         exoPlayer.run {
@@ -47,6 +52,7 @@ class MainActivity : AppCompatActivity() {
         playPauseButton = playerView.findViewById(R.id.exo_play_pause_button)
         fullscreenButton = playerView.findViewById(R.id.exo_full_screen)
         titleText = playerView.findViewById(R.id.exo_title)
+        bufferingProgressBar = findViewById(R.id.exo_buffering_progress_bar)
         titleText.text = "Big Buck Bunny"
 
         playPauseButton.run {
@@ -101,6 +107,12 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen = true
             }
         }
+        exoPlayer.addListener(object : Player.Listener {
+            override fun onPlaybackStateChanged(playbackState: Int) {
+                super.onPlaybackStateChanged(playbackState)
+                bufferingProgressBar.isGone = Player.STATE_BUFFERING != playbackState
+            }
+        })
     }
 
     override fun onResume() {
