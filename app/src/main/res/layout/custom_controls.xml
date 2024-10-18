@@ -133,8 +133,19 @@
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/exo_full_screen"
+            app:layout_constraintEnd_toStartOf="@id/exo_caption"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/exo_caption"
+            android:layout_width="44dp"
+            android:layout_height="24dp"
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/caption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/exo_full_screen"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/exo_full_screen"

@@ -7,6 +7,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var backwardButton: ImageView
     private lateinit var playPauseButton: ImageView
     private lateinit var fullscreenButton: ImageView
+    private lateinit var subtitlesButton: ImageView
     private lateinit var titleText: TextView
     private lateinit var bufferingProgressBar: ProgressBar
     private lateinit var playerView: PlayerView
@@ -51,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         backwardButton = playerView.findViewById(R.id.exo_backward)
         playPauseButton = playerView.findViewById(R.id.exo_play_pause_button)
         fullscreenButton = playerView.findViewById(R.id.exo_full_screen)
+        subtitlesButton = playerView.findViewById(R.id.exo_caption)
         titleText = playerView.findViewById(R.id.exo_title)
         bufferingProgressBar = findViewById(R.id.exo_buffering_progress_bar)
         titleText.text = "Big Buck Bunny"
@@ -74,6 +77,9 @@ class MainActivity : AppCompatActivity() {
         }
         backButton.setOnClickListener {
             finish()
+        }
+        subtitlesButton.setOnClickListener {
+            Toast.makeText(this, "Clicked on subtitles icon", Toast.LENGTH_SHORT).show()
         }
         fullscreenButton.setOnClickListener {
             if (isFullScreen) {
