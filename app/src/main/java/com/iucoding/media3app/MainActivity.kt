@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         forwardButton = playerView.findViewById(R.id.exo_forward)
         backwardButton = playerView.findViewById(R.id.exo_backward)
         playPauseButton = playerView.findViewById(R.id.exo_play_pause_button)
-        fullscreenButton = playerView.findViewById(R.id.exo_fullscreen)
+        fullscreenButton = playerView.findViewById(R.id.exo_full_screen)
         titleText = playerView.findViewById(R.id.exo_title)
         titleText.text = "Big Buck Bunny"
 
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         }
         fullscreenButton.setOnClickListener {
             if (isFullScreen) {
-                titleText.visibility = View.INVISIBLE
+                //titleText.visibility = View.INVISIBLE
                 fullscreenButton.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.fullscreenclose)
                 )
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen = false
 
             } else {
-                titleText.visibility = View.VISIBLE
+                //titleText.visibility = View.VISIBLE
                 fullscreenButton.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.fullscreenopen)
                 )

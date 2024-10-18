@@ -26,7 +26,6 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/exo_back"
         app:layout_constraintStart_toEndOf="@id/exo_back"
         app:layout_constraintTop_toTopOf="@id/exo_back" />
@@ -61,13 +60,14 @@
         app:layout_constraintStart_toEndOf="@id/exo_play_pause_button"
         app:layout_constraintTop_toTopOf="@id/exo_play_pause_button" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/exo_bottom_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:background="#AA000000"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -80,13 +80,24 @@
             android:text="00:00"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.media3.ui.DefaultTimeBar
-            android:id="@+id/exo_progress_placeholder"
+            android:id="@+id/exo_progress"
             android:layout_width="0dp"
-            android:layout_height="18dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            app:buffered_color="#E6E6FA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/exo_duration"
+            app:layout_constraintStart_toEndOf="@id/exo_position"
+            app:layout_constraintTop_toTopOf="parent"
+            app:played_color="#7F00FF"
+            app:scrubber_color="#7F00FF"
+            app:scrubber_drawable="@drawable/scrubber"
+            app:unplayed_color="#B3B3B3" />
 
         <TextView
             android:id="@+id/exo_duration"
@@ -95,16 +106,21 @@
             android:text="00:00"
             android:textColor="@color/white"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/exo_full_screen"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/exo_fullscreen"
-            android:layout_width="24dp"
+            android:id="@+id/exo_full_screen"
+            android:layout_width="44dp"
             android:layout_height="24dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/fullscreenclose" />
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/fullscreenclose"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,16 +12,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/black"
-        app:buffered_color="#E6E6FA"
         app:controller_layout_id="@layout/custom_controls"
         app:layout_constraintDimensionRatio="16:9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:played_color="#7F00FF"
         app:resize_mode="fit"
-        app:scrubber_color="#7F00FF"
-        app:show_buffering="when_playing"
-        app:unplayed_color="#B3B3B3" />
+        app:show_buffering="when_playing" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
