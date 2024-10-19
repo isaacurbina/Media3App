@@ -12,10 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
+import com.github.ybq.android.spinkit.sprite.Sprite
+import com.github.ybq.android.spinkit.style.Circle
+import com.github.ybq.android.spinkit.style.DoubleBounce
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,8 +60,10 @@ class MainActivity : AppCompatActivity() {
         fullscreenButton = playerView.findViewById(R.id.exo_full_screen)
         subtitlesButton = playerView.findViewById(R.id.exo_caption)
         titleText = playerView.findViewById(R.id.exo_title)
-        bufferingProgressBar = findViewById(R.id.exo_buffering_progress_bar)
+        bufferingProgressBar = findViewById(R.id.exo_spin_kit)
         titleText.text = "Big Buck Bunny"
+        val circle: Sprite = Circle()
+        bufferingProgressBar.indeterminateDrawable = circle
 
         playPauseButton.run {
             setOnClickListener {
@@ -116,7 +123,11 @@ class MainActivity : AppCompatActivity() {
         exoPlayer.addListener(object : Player.Listener {
             override fun onPlaybackStateChanged(playbackState: Int) {
                 super.onPlaybackStateChanged(playbackState)
-                bufferingProgressBar.isGone = Player.STATE_BUFFERING != playbackState
+                val isBuffering = Player.STATE_BUFFERING == playbackState
+                bufferingProgressBar.isGone = !isBuffering
+                playPauseButton.isInvisible = isBuffering
+                forwardButton.isInvisible = isBuffering
+                backwardButton.isInvisible = isBuffering
             }
         })
     }
