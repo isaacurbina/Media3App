@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Media3App</string>
+    <string name="track_selection_title">Select tracks</string>
+    <string name="track_selection_title_video">Video</string>
+    <string name="track_selection_title_audio">Audio</string>
+    <string name="track_selection_title_text">Text</string>
+    <string name="track_selection_title_image">Image</string>
 </resources>
