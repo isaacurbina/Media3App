@@ -46,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/exo_speed"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/baseline_slow_motion_video_24"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -56,8 +56,8 @@
 
             <ImageView
                 android:id="@+id/exo_resize"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginEnd="10dp"
                 android:src="@drawable/baseline_aspect_ratio_24"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -151,6 +151,7 @@
             android:id="@+id/exo_duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:text="00:00"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -161,9 +162,9 @@
 
         <ImageView
             android:id="@+id/exo_caption"
-            android:layout_width="44dp"
+            android:layout_width="24dp"
             android:layout_height="24dp"
-            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/caption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/exo_full_screen"
@@ -172,10 +173,20 @@
 
         <ImageView
             android:id="@+id/exo_full_screen"
-            android:layout_width="44dp"
+            android:layout_width="24dp"
             android:layout_height="24dp"
-            android:paddingHorizontal="10dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/fullscreenclose"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/exo_quality_setting"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/exo_quality_setting"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/baseline_app_settings_alt_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
