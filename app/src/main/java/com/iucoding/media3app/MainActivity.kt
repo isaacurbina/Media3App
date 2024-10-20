@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.OptIn
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -17,8 +18,11 @@ import androidx.core.view.isInvisible
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
+import androidx.media3.ui.PlayerView.ControllerVisibilityListener
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.github.ybq.android.spinkit.style.Circle
 
@@ -32,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fullscreenButton: ImageView
     private lateinit var subtitlesButton: ImageView
     private lateinit var speedButton: ImageView
+    private lateinit var resizeButton: ImageView
     private lateinit var titleText: TextView
     private lateinit var bufferingProgressBar: ProgressBar
     private lateinit var playerView: PlayerView
@@ -44,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         "1.25x" to 1.25f,
         "1.5x" to 1.5f
     )
+    private var resizeMode = 0
 
+    @OptIn(UnstableApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -71,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         titleText = playerView.findViewById(R.id.exo_title)
         bufferingProgressBar = findViewById(R.id.exo_spin_kit)
         speedButton = playerView.findViewById(R.id.exo_speed)
+        resizeButton = playerView.findViewById(R.id.exo_resize)
         titleText.text = "Big Buck Bunny"
         val circle: Sprite = Circle()
         bufferingProgressBar.indeterminateDrawable = circle
@@ -149,6 +157,34 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             dialog.show()
+        }
+        playerView.setControllerVisibilityListener(ControllerVisibilityListener {
+            if (isFullScreen) {
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                isFullScreen = true
+            }
+        })
+        resizeButton.setOnClickListener {
+            when (resizeMode) {
+                0 -> {
+                    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
+                    resizeMode = 1
+                }
+                1 -> {
+                    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIXED_HEIGHT
+                    resizeMode = 2
+                }
+                2 -> {
+                    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
+                    resizeMode = 3
+                }
+                3 -> {
+                    playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+                    resizeMode = 0
+                }
+            }
         }
     }
 
