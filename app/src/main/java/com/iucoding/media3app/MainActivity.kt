@@ -8,18 +8,19 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.github.ybq.android.spinkit.style.Circle
-import com.github.ybq.android.spinkit.style.DoubleBounce
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,11 +31,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var playPauseButton: ImageView
     private lateinit var fullscreenButton: ImageView
     private lateinit var subtitlesButton: ImageView
+    private lateinit var speedButton: ImageView
     private lateinit var titleText: TextView
     private lateinit var bufferingProgressBar: ProgressBar
     private lateinit var playerView: PlayerView
     private lateinit var exoPlayer: ExoPlayer
     private var isFullScreen: Boolean = false
+    private var speed = listOf(
+        "0.5x" to 0.5f,
+        "0.75x" to 0.75f,
+        "1.0x" to 1.0f,
+        "1.25x" to 1.25f,
+        "1.5x" to 1.5f
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         subtitlesButton = playerView.findViewById(R.id.exo_caption)
         titleText = playerView.findViewById(R.id.exo_title)
         bufferingProgressBar = findViewById(R.id.exo_spin_kit)
+        speedButton = playerView.findViewById(R.id.exo_speed)
         titleText.text = "Big Buck Bunny"
         val circle: Sprite = Circle()
         bufferingProgressBar.indeterminateDrawable = circle
@@ -90,7 +100,6 @@ class MainActivity : AppCompatActivity() {
         }
         fullscreenButton.setOnClickListener {
             if (isFullScreen) {
-                //titleText.visibility = View.INVISIBLE
                 fullscreenButton.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.fullscreenclose)
                 )
@@ -104,7 +113,6 @@ class MainActivity : AppCompatActivity() {
                 isFullScreen = false
 
             } else {
-                //titleText.visibility = View.VISIBLE
                 fullscreenButton.setImageDrawable(
                     ContextCompat.getDrawable(this, R.drawable.fullscreenopen)
                 )
@@ -130,6 +138,18 @@ class MainActivity : AppCompatActivity() {
                 backwardButton.isInvisible = isBuffering
             }
         })
+        speedButton.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).apply {
+                setTitle("Set speed")
+                setItems(speed.map { it.first }.toTypedArray()) { _, which ->
+                    speed.getOrNull(which)?.second?.let { selectedSpeed ->
+                        val params = PlaybackParameters(selectedSpeed)
+                        exoPlayer.playbackParameters = params
+                    }
+                }
+            }
+            dialog.show()
+        }
     }
 
     override fun onResume() {
